@@ -1,7 +1,7 @@
 
 package Controller;
 
-import Model.Livro;
+import Model.Serie;
 import View.CadastrarView;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -19,30 +19,33 @@ public class CadastrarController implements ActionListener {
 
     
     private JTextField textTitulo;
-    private JTextField textAutor;
-    private JComboBox checkGenero;
+    private JComboBox comboTemp;
     private JComboBox checkAno;
-    private JCheckBox checkLeu;
+    private JTextField textNota;
+    private JComboBox comboSerie;    
+    private JCheckBox checkAssistido;
     private JButton btnCadastrar;
-    private List<Livro> listaLivros;
+    private List<Serie> listaLivros;
     
     
     public CadastrarController(
             JTextField textTitulo,
-            JTextField textAutor,
-            JComboBox checkGenero,
+            JComboBox comboSerie,
+            JComboBox comboTemp,
             JComboBox checkAno,
-            JCheckBox checkLeu,
+            JCheckBox checkAssistido,
+            JTextField textNota,
             JButton btnCadastrar
     ){
         this.textTitulo = textTitulo;
-        this.textAutor = textAutor;
-        this.checkGenero = checkGenero;
+        this.comboSerie = comboSerie;
+        this.comboTemp = comboTemp;
         this.checkAno = checkAno;
-        this.checkLeu = checkLeu;
-        
+        this.checkAssistido = checkAssistido;
+        this.textNota = textNota;
         this.popularComboAno();
-        this.popularComboGenero();
+        this.popularComboTemporada();
+        this.popularComboSerie();
         listaLivros = new ArrayList<>();
     }
     
@@ -57,26 +60,44 @@ public class CadastrarController implements ActionListener {
         }
     }
     
-    private void popularComboGenero() {
-        String[] generos = new String[] { "Terror", "Comedia", "Drama" };
-        for (String generoLoop : generos) {
-            this.checkGenero.addItem(generoLoop);
+    private void popularComboSerie() {
+        String[] serie = new String[] { "Escolha sua série",
+            "Friends",
+            "Breaking Bad",
+            "Arquivo X",
+            "Game of Thrones",
+            "Seinfeld",
+            "Família Soprano",
+            "Os Simpsons",
+            "Anos Incríveis",
+            "Family Guy",
+            "24 Horas"
+        };
+        for (String serieLoop : serie) {
+            this.comboSerie.addItem(serieLoop);
         }
     }
     
-    private void criarNovoLivro(){
-        Livro livro = new Livro(
-                this.textTitulo.getText(),
-                this.textAutor.getText(),
-                this.checkGenero.getSelectedItem().toString(),
-                Integer.parseInt(this.checkAno .getSelectedItem().toString()),
-                this.checkLeu.isSelected()
+    private void popularComboTemporada() {
+        for (int i = 1; i < 11; i++) {
+            this.comboTemp.addItem("Temporada " + i);
+        }
+    }
+    
+    private void criarNovoEpisodio(){
+        Serie livro = new Serie(
+            this.comboSerie.getSelectedItem().toString(),
+            this.textTitulo.getText(),
+            this.comboTemp.getSelectedItem().toString(),
+            Integer.parseInt(this.checkAno .getSelectedItem().toString()),
+            this.checkAssistido.isSelected(),
+            this.textNota.getText()
         );
         
         
         listaLivros.add(livro);
         
-        for (Livro livroLoop : listaLivros) {
+        for (Serie livroLoop : listaLivros) {
             System.out.println(livroLoop.toString());
         }
         
@@ -86,7 +107,7 @@ public class CadastrarController implements ActionListener {
     public void actionPerformed(ActionEvent arg0) {
         
         System.out.println(arg0.getActionCommand());
-        this.criarNovoLivro();
+        this.criarNovoEpisodio();
     }
     
 }

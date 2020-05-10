@@ -40,7 +40,7 @@ public class InicioView extends JFrame {
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Meus Livros");
+        jLabel1.setText("Epísodios de série");
 
         btnExibir.setText("Exibir");
 
