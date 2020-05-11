@@ -84,7 +84,7 @@ public class CadastrarController implements ActionListener {
     
     private void popularComboTemporada() {
         for (int i = 1; i < 11; i++) {
-            this.comboTemp.addItem("Temporada " + i);
+            this.comboTemp.addItem(i);
         }
     }
     
