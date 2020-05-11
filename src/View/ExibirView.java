@@ -18,6 +18,7 @@ public class ExibirView extends javax.swing.JFrame {
  
     /**
      * Creates new form ExibirView
+     * @throws java.lang.ClassNotFoundException
      */
     public ExibirView() throws ClassNotFoundException {
         initComponents();

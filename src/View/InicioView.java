@@ -3,11 +3,13 @@ package View;
 import Controller.CadastrarController;
 import javax.swing.JFrame;
 import Controller.InicioController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InicioView extends JFrame {
 
 
-    public InicioView() {
+    public InicioView() throws ClassNotFoundException {
         initComponents();
         
         
@@ -100,7 +102,11 @@ public class InicioView extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InicioView().setVisible(true);
+                try {
+                    new InicioView().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

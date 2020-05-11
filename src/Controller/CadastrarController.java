@@ -121,9 +121,7 @@ public class CadastrarController implements ActionListener {
         System.out.println(arg0.getActionCommand());
         try {
             this.criarNovoEpisodio();
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
