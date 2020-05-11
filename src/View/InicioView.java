@@ -2,7 +2,6 @@ package View;
 
 import Controller.CadastrarController;
 import javax.swing.JFrame;
-import Controller.ExibirController;
 import Controller.InicioController;
 
 public class InicioView extends JFrame {

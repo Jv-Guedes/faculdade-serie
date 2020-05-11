@@ -13,6 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import DAO.SerieDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class CadastrarController implements ActionListener {
@@ -25,7 +29,7 @@ public class CadastrarController implements ActionListener {
     private JComboBox comboSerie;    
     private JCheckBox checkAssistido;
     private JButton btnCadastrar;
-    private List<Serie> listaLivros;
+    private List<Serie> listaSerie;
     
     
     public CadastrarController(
@@ -46,7 +50,7 @@ public class CadastrarController implements ActionListener {
         this.popularComboAno();
         this.popularComboTemporada();
         this.popularComboSerie();
-        listaLivros = new ArrayList<>();
+        listaSerie = new ArrayList<>();
     }
     
     
@@ -84,7 +88,7 @@ public class CadastrarController implements ActionListener {
         }
     }
     
-    private void criarNovoEpisodio(){
+    private void criarNovoEpisodio() throws SQLException, ClassNotFoundException{
         Serie livro = new Serie(
             this.comboSerie.getSelectedItem().toString(),
             this.textTitulo.getText(),
@@ -95,19 +99,37 @@ public class CadastrarController implements ActionListener {
         );
         
         
-        listaLivros.add(livro);
+        listaSerie.add(livro);
         
-        for (Serie livroLoop : listaLivros) {
+        for (Serie livroLoop : listaSerie) {
             System.out.println(livroLoop.toString());
         }
-        
+        SerieDAO serie = new SerieDAO();
+                serie.insertSerie(
+                this.comboSerie.getSelectedItem().toString(),
+                this.textTitulo.getText(),
+                this.comboTemp.getSelectedItem().toString(),
+                Integer.parseInt(this.checkAno .getSelectedItem().toString()),
+                this.checkAssistido.isSelected(),
+                this.textNota.getText()
+            );
     }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
         
         System.out.println(arg0.getActionCommand());
-        this.criarNovoEpisodio();
+        try {
+            this.criarNovoEpisodio();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public List returnList(){
+        return listaSerie;
     }
     
 }

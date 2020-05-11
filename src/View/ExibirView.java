@@ -5,6 +5,11 @@
  */
 package View;
 
+import Controller.ExibirController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  *
  * @author lesimoes
@@ -14,8 +19,9 @@ public class ExibirView extends javax.swing.JFrame {
     /**
      * Creates new form ExibirView
      */
-    public ExibirView() {
+    public ExibirView() throws ClassNotFoundException {
         initComponents();
+        ExibirController handle = new ExibirController(tableSerie);
     }
 
     /**
@@ -36,10 +42,7 @@ public class ExibirView extends javax.swing.JFrame {
 
         tableSerie.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Serie", "Episodio ", "Ano", "Temporada", "Ja viu", "Nota"
@@ -60,16 +63,15 @@ public class ExibirView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 10, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -105,7 +107,11 @@ public class ExibirView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ExibirView().setVisible(true);
+                try {
+                    new ExibirView().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ExibirView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

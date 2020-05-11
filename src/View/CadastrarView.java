@@ -7,7 +7,6 @@ package View;
 
 import Controller.CadastrarController;
 import java.awt.event.KeyEvent;
-
 /**
  *
  * @author lesimoes
@@ -17,7 +16,7 @@ public class CadastrarView extends javax.swing.JFrame {
     
     public CadastrarView() {
         initComponents();
-    
+       
         CadastrarController controller = new CadastrarController(textSerie,comboSerie,  comboTemp, checkAno, checkAssistido,textNota, btnCadastrar);
         btnCadastrar.addActionListener(controller);
     }
